@@ -5,16 +5,16 @@ services:
 before_install:
  - docker build -t amohamedd74/react-test -f ./client/Dockerfile.dev ./client
 
- script:
+script:
   - docker run -e CI=true amohamedd74/react-test npm test -- --coverage
 
-  after_success:
-    - docker build -t amohamedd74/multi-client ./client
-    - docker build -t amohamedd74/multi-client ./nginx
-    - docker build -t amohamedd74/multi-client ./server
-    - docker build -t amohamedd74/multi-client ./worker
-    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-    - docker push amohamedd74/multi-client
-    - docker push amohamedd74/multi-client
-    - docker push amohamedd74/multi-client
-    - docker push amohamedd74/multi-client
+after_success:
+  - docker build -t amohamedd74/multi-client ./client
+  - docker build -t amohamedd74/multi-client ./nginx
+  - docker build -t amohamedd74/multi-client ./server
+  - docker build -t amohamedd74/multi-client ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push amohamedd74/multi-client
+  - docker push amohamedd74/multi-client
+  - docker push amohamedd74/multi-client
+  - docker push amohamedd74/multi-client
