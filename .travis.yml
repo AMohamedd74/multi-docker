@@ -10,11 +10,11 @@ script:
 
 after_success:
   - docker build -t amohamedd74/multi-client ./client
-  - docker build -t amohamedd74/multi-client ./nginx
-  - docker build -t amohamedd74/multi-client ./server
-  - docker build -t amohamedd74/multi-client ./worker
+  - docker build -t amohamedd74/multi-nginx ./nginx
+  - docker build -t amohamedd74/multi-server ./server
+  - docker build -t amohamedd74/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push amohamedd74/multi-client
-  - docker push amohamedd74/multi-client
-  - docker push amohamedd74/multi-client
-  - docker push amohamedd74/multi-client
+  - docker push amohamedd74/multi-nginx
+  - docker push amohamedd74/multi-server
+  - docker push amohamedd74/multi-worker
